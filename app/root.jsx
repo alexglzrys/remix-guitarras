@@ -1,9 +1,13 @@
 import {
   Links,
+  LiveReload,
   Meta,
   Outlet,
+  Scripts,
 } from "@remix-run/react";
-import styles from "./styles/index.css";
+import { Header } from "./components/Header";
+// En el archivo tsconfig.json hay declarado un path que apunta a la raiz de del proeycto, ~/* 
+import styles from "~/styles/index.css";
 
 // metainformación a cargar en el header de la aplicación
 // Se requiere importar el componente Meta para que inyecte automáticamente esta información
@@ -49,8 +53,13 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <Header />
         {/* Inyectar la información de los archivos de ruta */}
         <Outlet />
+        {/* Inyectar scripts utilitarios de Remix */}
+        <Scripts />
+        {/* Inyectar Livereload - necesario para escuchar cambios en desarrollo */}
+        <LiveReload />
       </body>
     </html>
   );

@@ -1,3 +1,8 @@
+export const meta = () => ({
+    title: 'GuitarLA - Tienda'
+})
+
+
 const Tienda = () => {
   return (
     <div>
