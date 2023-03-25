@@ -8,6 +8,7 @@ import {
 import { Header } from "./components/Header";
 // En el archivo tsconfig.json hay declarado un path que apunta a la raiz de del proeycto, ~/* 
 import styles from "~/styles/index.css";
+import { Footer } from "~/components/Footer";
 
 // metainformación a cargar en el header de la aplicación
 // Se requiere importar el componente Meta para que inyecte automáticamente esta información
@@ -57,6 +58,7 @@ export default function App() {
         {/* Inyectar la información de los archivos de ruta */}
         <Outlet />
         {/* Inyectar scripts utilitarios de Remix */}
+        <Footer />
         <Scripts />
         {/* Inyectar Livereload - necesario para escuchar cambios en desarrollo */}
         <LiveReload />
