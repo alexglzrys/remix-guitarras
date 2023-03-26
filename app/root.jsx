@@ -1,9 +1,11 @@
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
+  useCatch,
 } from "@remix-run/react";
 import { Header } from "./components/Header";
 // En el archivo tsconfig.json hay declarado un path que apunta a la raiz de del proeycto, ~/* 
@@ -48,6 +50,16 @@ export const links = () => [
 // El componente principal de la aplicación se debe llamar App
 export default function App() {
   return (
+    <Document>
+        {/* Inyectar la información de los archivos de ruta */}
+        <Outlet />
+      </Document>
+  );
+}
+
+// Wrapper para conservar la estructura principal de la página en los componentes de error
+export const Document = ({children}) => {
+  return (
     <html lang="es-MX">
       <head>
         <Meta />
@@ -55,14 +67,40 @@ export default function App() {
       </head>
       <body>
         <Header />
-        {/* Inyectar la información de los archivos de ruta */}
-        <Outlet />
-        {/* Inyectar scripts utilitarios de Remix */}
+        {children}
         <Footer />
+        {/* Inyectar scripts utilitarios de Remix */}
         <Scripts />
         {/* Inyectar Livereload - necesario para escuchar cambios en desarrollo */}
         <LiveReload />
       </body>
     </html>
-  );
+  )
+}
+
+/* MANEJO DE ERROES */
+// Estos se deberían lanzar desde los componentes de página al no encontrar información
+export const CatchBoundary = () => {
+  const error = useCatch();
+  return (
+    <Document>
+      <div className="contenedor error">
+        <h3 className="error-titulo">{error.status}</h3>
+        <p className="error-mensaje">{error.statusText}</p>
+        <Link to="/" className="error-enlace">Volver a la página principal</Link>
+      </div>
+    </Document>
+  )
+}
+
+export const ErrorBoundary = ({error}) => {
+  return (
+    <Document>
+      <div className="contenedor error">
+        <h3 className="error-titulo">{error.status}</h3>
+        <p className="error-mensaje">{error.statusText}</p>
+        <Link to="/" className="error-enlace">Volver a la página principal</Link>
+      </div>
+    </Document>
+  )
 }
