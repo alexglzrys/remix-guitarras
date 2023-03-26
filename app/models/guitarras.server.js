@@ -8,3 +8,11 @@ export const getGuitarras = async() => {
     const response = request.json();
     return response;
 }
+
+// Buscar guitarra por slug
+export const getGuitarra = async(url) => {
+    // Filtrar la busqueda por el campo url (en este caso es el slug del producto)
+    const request = await fetch(`${process.env.API_URL}/guitars?filters[url]=${url}&populate=imagen`);
+    const response = await request.json();
+    return response;
+}

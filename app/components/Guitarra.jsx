@@ -12,7 +12,7 @@ const Guitarra = ({ guitarra }) => {
         <h3 className="titulo">{titulo}</h3>
         <p className="descripcion">{descripcion}</p>
         <p className="precio">$ {precio}</p>
-        <Link className="enlace" to={`guitarras/${url}`}>
+        <Link className="enlace" to={`/guitarras/${url}`}>
           Ver producto
         </Link>
       </div>
