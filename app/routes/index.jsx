@@ -2,9 +2,11 @@
 
 import { useLoaderData } from "@remix-run/react"
 import { ListadoGuitarras } from "../components/ListadoGuitarras"
+import { ListadoPosts } from "../components/ListadoPosts"
 import { getGuitarras } from "../models/guitarras.server"
 import { getPosts } from "../models/posts.server"
 import stylesGuitarras from '../styles/guitarras.css'
+import stylesPosts from '../styles/blog.css'
 
 export const meta = () => ({
   title: 'GuitarLA - Guitarras Profesionales',
@@ -15,6 +17,10 @@ export const links = () => ([
   {
     rel: 'stylesheet',
     href: stylesGuitarras
+  },
+  {
+    rel: 'stylesheet',
+    href: stylesPosts
   }
 ])
 
@@ -34,9 +40,15 @@ export const loader = async() => {
 const Index = () => {
   const {guitarras, posts} = useLoaderData()
   return (
+    <>
     <div className="contenedor">
       <ListadoGuitarras guitarras={guitarras} />
     </div>
+    <div className="contenedor">
+      <ListadoPosts posts={posts} />
+    </div>
+    </>
+    
   )
 }
 
