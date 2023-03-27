@@ -18,6 +18,7 @@ export const meta = () => ({
   charset: "utf-8",
   title: "GuitarLA - Remix",
   viewport: "width=device-width,initial-scale=1",
+  description: 'GuitarLA - La mejor tienda de guitarras'
 });
 
 // hojas de estilo a cargar en el header de la aplicación

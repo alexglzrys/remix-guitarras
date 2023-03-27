@@ -16,6 +16,7 @@
 .post {
     display: flex;
     flex-direction: column;
+    max-width: 80rem;
 }
 .post .contenido {
     flex: 1;
@@ -30,7 +31,7 @@
 .post .titulo {
     font-weight: 700;
     font-size: 2.5rem;
-    margin: 1rem 0;
+    margin: 2rem 0 0;
 }
 .post .resumen {
     display: -webkit-box;
@@ -39,4 +40,7 @@
     overflow: hidden;
     margin-bottom: 2rem;
     flex: 1;
+}
+.post .texto {
+    white-space: pre-wrap;
 }
