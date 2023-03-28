@@ -50,7 +50,7 @@ const GuitarraPage = () => {
     const guitarra = useLoaderData();
     const {titulo, descripcion, imagen, precio,} = guitarra.data[0].attributes;
   return (
-    <div className='contenedor guitarra'>
+    <div className='guitarra'>
         <img src={imagen.data.attributes.url} alt={`Imagen de guitarra ${titulo}`} />
         <div className="contenido">
             <h3>{titulo}</h3>
