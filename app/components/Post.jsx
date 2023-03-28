@@ -14,7 +14,7 @@ export const Post = ({ post }) => {
         <h3 className="titulo">{titulo}</h3>
         <p className="fecha">{formatearFecha(createdAt)}</p>
         <div className="resumen">{contenido}</div>
-        <Link className="enlace" to={`/posts/${url}`}>
+        <Link className="enlace" to={`/blog/${url}`}>
           Leer Post
         </Link>
       </div>
