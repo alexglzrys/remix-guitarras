@@ -81,6 +81,19 @@ export default function App() {
     }
   }
 
+  // Controlador para actualizar la cantidad de un producto seleccionado en el carrito
+  const actualizarCantidadProducto = (producto) => {
+     // Buscar el producto y actualizar la cantidad
+    const lista_productos_actualizados = carrito.map(productoState => {
+      if (productoState.id === producto.id) {
+        productoState.cantidad = producto.cantidad;
+      }
+      return productoState;
+    })
+     // guardar la lista de productos actualizados en el estado global
+     setCarrito(lista_productos_actualizados);
+  }
+
   return (
     <Document>
         {/* 
@@ -105,7 +118,8 @@ export default function App() {
         */}
         <Outlet context={{
           agregarAlCarrito,
-          carrito
+          carrito,
+          actualizarCantidadProducto
         }} />
       </Document>
   );
