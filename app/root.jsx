@@ -64,7 +64,21 @@ export default function App() {
 
   // Controlador para agregar productos al carrito de compras - estado global de la aplicación
   const agregarAlCarrito = (producto) => {
-    setCarrito([...carrito, producto]);
+    // Evitar registras duplicados
+    if (carrito.some(productoState => productoState.id === producto.id)) {
+      // Buscar el producto y actualizar la cantidad
+      const lista_productos_actualizados = carrito.map(productoState => {
+        if (productoState.id === producto.id) {
+          productoState.cantidad = producto.cantidad;
+        }
+        return productoState;
+      })
+      // guardar la lista de productos actualizados en el estado global
+      setCarrito(lista_productos_actualizados);
+    } else {
+      // Nuevo producto
+      setCarrito([...carrito, producto]);
+    }
   }
 
   return (
