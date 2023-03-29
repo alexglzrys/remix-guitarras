@@ -104,7 +104,8 @@ export default function App() {
               pagina
         */}
         <Outlet context={{
-          agregarAlCarrito
+          agregarAlCarrito,
+          carrito
         }} />
       </Document>
   );
