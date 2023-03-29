@@ -19,7 +19,7 @@ const Carrito = () => {
   const [total, setTotal] = useState(0);
   
   // Recuperar el contexto de información referente al carrio de la compra
-  const { carrito, actualizarCantidadProducto } = useOutletContext();
+  const { carrito, actualizarCantidadProducto, eliminarProductoDelCarrito } = useOutletContext();
 
   // Efecto sencundario para observar cambios en el carrito de compra y actualizar el total a pagar
   useEffect(() => {
@@ -61,6 +61,7 @@ const Carrito = () => {
                     <p className="precio">$ <span>{producto.precio}</span></p>
                     <p className="subtotal">Subtotal $ <span>{producto.cantidad * producto.precio}</span></p>
                   </div>
+                  <button type="button" className="btn_eliminar" onClick={e => eliminarProductoDelCarrito(producto.id)}>x</button>
                 </div>
               ))}
         </div>

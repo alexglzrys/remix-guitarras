@@ -94,6 +94,12 @@ export default function App() {
      setCarrito(lista_productos_actualizados);
   }
 
+  // Controlador para eliminar un producto del carrtido de compra
+  const eliminarProductoDelCarrito = (id) => {
+    const lista_productos_actualizados = carrito.filter(productoState => productoState.id !== id);
+    setCarrito(lista_productos_actualizados);
+  }
+
   return (
     <Document>
         {/* 
@@ -119,7 +125,8 @@ export default function App() {
         <Outlet context={{
           agregarAlCarrito,
           carrito,
-          actualizarCantidadProducto
+          actualizarCantidadProducto,
+          eliminarProductoDelCarrito
         }} />
       </Document>
   );

@@ -26,6 +26,7 @@
     align-items: center;
     padding: 3rem 0;
     border-bottom: 1px solid #cfcfcf;
+    position: relative;
 }
 .producto:last-of-type {
     border-bottom: none;
@@ -58,4 +59,15 @@
     width: 100%;
     border-radius: 1rem;
     padding: 1rem;
+}
+.btn_eliminar {
+    all: unset;
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+    cursor: pointer;
+    transition: 300ms;
+}
+.btn_eliminar:hover {
+    color: var(--primary);
 }
