@@ -11,7 +11,7 @@ import { Header } from "./components/Header";
 // En el archivo tsconfig.json hay declarado un path que apunta a la raiz de del proeycto, ~/* 
 import styles from "~/styles/index.css";
 import { Footer } from "~/components/Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // metainformación a cargar en el header de la aplicación
 // Se requiere importar el componente Meta para que inyecte automáticamente esta información
@@ -58,9 +58,23 @@ export default function App() {
    * por tanto, en lugar de usar el Context API nativo de React, deberemos usar el que propone el equipo de Remix
    */
 
+  // Recuperar información de LocalStorage referente al carrito de la compra (estado inicial)
+
+  // Remix se ejecuta tanto el cliente como en el servidor. Hay que tener cuidado por que localStorage es un API que solo existe en el cliente
+  // En este sentido, podemos comprobar el objeto window, si no esta definido significa que se está en el servidor, caso contrario estamos en el cliente
+  // Este tipo de comprabación puede dar lugar a un desfase de información (cosas difernetes renderizadas en el server y en el cliente). 
+  //      Lo que se conoce como problema de hidratación. (esto se lanza en consola, en interfaces que renderizan la información)
+  // Remix cuenta con componete ClientOnly que puede ayduar a prevenir este tipo de problemas. para ello hay que instalar el paquete de utilerias de remix-utils 
+  const carritoLocalStorage = typeof window === 'undefined' ? null : JSON.parse(localStorage.getItem('carrito')) ?? [];
+
   // Estado global de la aplicación
   // Carrito de compras
-  const [carrito, setCarrito] = useState([]);
+  const [carrito, setCarrito] = useState(carritoLocalStorage);
+
+  // Efecto secundario para actualizar la información en LocalStorage si el carrito se actualiza
+  useEffect(() => {
+    localStorage.setItem('carrito', JSON.stringify(carrito))
+  }, [carrito])
 
   // Controlador para agregar productos al carrito de compras - estado global de la aplicación
   const agregarAlCarrito = (producto) => {
