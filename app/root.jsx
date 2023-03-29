@@ -11,6 +11,7 @@ import { Header } from "./components/Header";
 // En el archivo tsconfig.json hay declarado un path que apunta a la raiz de del proeycto, ~/* 
 import styles from "~/styles/index.css";
 import { Footer } from "~/components/Footer";
+import { useState } from "react";
 
 // metainformación a cargar en el header de la aplicación
 // Se requiere importar el componente Meta para que inyecte automáticamente esta información
@@ -50,10 +51,47 @@ export const links = () => [
 
 // El componente principal de la aplicación se debe llamar App
 export default function App() {
+
+  /**
+   * Remix
+   * Este framework cuenta con su propio Context API, 
+   * por tanto, en lugar de usar el Context API nativo de React, deberemos usar el que propone el equipo de Remix
+   */
+
+  // Estado global de la aplicación
+  // Carrito de compras
+  const [carrito, setCarrito] = useState([]);
+
+  // Controlador para agregar productos al carrito de compras - estado global de la aplicación
+  const agregarAlCarrito = (producto) => {
+    setCarrito([...carrito, producto]);
+  }
+
   return (
     <Document>
-        {/* Inyectar la información de los archivos de ruta */}
-        <Outlet />
+        {/* 
+          Outlet: Inyectar la información de los archivos de ruta
+          context: Es el prop que usan los componentes de Remix para pasar el contexto (Context API Remix)
+          
+          Importante: 
+          Podemos pasar cualquier cosa que sea de JS al contexto
+          Pero es importante saber que la información solo estará disponible en el primer nivel del Outlet,
+          es decir, todas las paginas renderizadas en ese Outlet tendrán acceso al contexto.
+
+          Sin embargo, 
+          Si hay Outlets anidados (Guitarras o Blog), es necesario volverla a pasar a través de su prop context correspindiente
+          Ya que de no hacerlo, esos páginas anidadas, no tendran acceso a la información
+
+          Outlet --- info
+            página
+            página
+            Outlet (los hijos no tendran acceso al contexto de forma predeterminada)
+              pagina
+              pagina
+        */}
+        <Outlet context={{
+          agregarAlCarrito
+        }} />
       </Document>
   );
 }

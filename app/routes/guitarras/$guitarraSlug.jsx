@@ -1,4 +1,4 @@
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData, useOutletContext } from '@remix-run/react';
 import React, { useState } from 'react'
 import { getGuitarra } from '../../models/guitarras.server';
 import css from '../../styles/guitarras.css'
@@ -47,6 +47,9 @@ export const meta = ({data}) => {
 }
 
 const GuitarraPage = () => {
+    // Recuperar el contexto global de la aplicación inyectado en el componente Outlet
+    const { agregarAlCarrito } = useOutletContext();
+
     /**
      * Remix
      * Es un framework que trabaja tanto en el servidor como en el cliente
@@ -63,7 +66,7 @@ const GuitarraPage = () => {
     const guitarra = useLoaderData();
     const {titulo, descripcion, imagen, precio,} = guitarra.data[0].attributes;
 
-    // Controlador de agregar al carrito
+    // Controlador de envío de formulario
     const handleSubmit = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -82,7 +85,9 @@ const GuitarraPage = () => {
             cantidad,
             imagen: imagen.data.attributes.url
         }
-        console.log(producto)
+        
+        // Usar la función compartida en el contexto para agregar el producto al carrito de la compra
+        agregarAlCarrito(producto);
     }
   return (
     <div className='guitarra'>
