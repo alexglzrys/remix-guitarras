@@ -1,4 +1,5 @@
 import { Link, useLocation } from "@remix-run/react";
+import imagen from '../../public/img/carrito.png'
 
 export const Navegacion = () => {
   // Hook personalizado para obtener información de la ruta actual
@@ -25,6 +26,9 @@ export const Navegacion = () => {
         className={location.pathname == "/blog" ? "active" : null}
       >
         Blog
+      </Link>
+      <Link to="/carrito">
+        <img src={imagen}  alt="carrito de compras"/>
       </Link>
     </div>
   );
